@@ -258,3 +258,87 @@ for ([scorer, goals] of Object.entries(newObject)) {
   }
   console.log(`${scorer} scored ${goals} ${message}`);
 }
+
+//////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, "⚽️ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽️ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [64, "🔶 TETSING"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽️ GOAL"],
+  [80, "⚽️ GOAL"],
+  [92, "🔶 Yellow card"],
+]);
+
+//1.
+const events = new Set(gameEvents.values());
+const minutes = new Set(gameEvents.keys());
+console.log(events);
+console.log(minutes);
+
+//2.
+//To delete data from a map dat astructure we use the built in method .delete(HERE SPECIFY THE KEY)
+gameEvents.delete(64);
+console.log("UNFAIR YELLOW CARD REMOVED");
+console.log(gameEvents);
+
+//3.
+let numberOfEvents = gameEvents.size;
+console.log(`An event happened every ${90 / numberOfEvents} minutes`);
+
+//4.
+for ([key, value] of gameEvents) {
+  if (key >= 45) {
+    console.log(`[SECIOND HALF] ${key}: ${value}`);
+  } else {
+    console.log(`[FIRST HALF] ${key}: ${value}`);
+  }
+}
+
+//////////////////////////////////////
+// Coding Challenge #4
+
+const capLastName = (fullName) => {
+  const [name, lastName] = fullName.split(" ");
+  console.log(name);
+  console.log(lastName);
+  //return `${name} ${lastName.toUpperCase()}`;
+  return lastName.toUpperCase();
+};
+
+capLastName("Matias Molina");
+console.log(capLastName("Daniel Varela"));
+
+const allFirstLettersUp = (str) => {
+  const names = str.split(" ");
+  const namesUpper = [];
+
+  for (n of names) {
+    //namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    //another way of doing this
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+
+  console.log(namesUpper.join(" "));
+};
+
+allFirstLettersUp("lets check if this works?");
