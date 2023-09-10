@@ -342,3 +342,66 @@ const allFirstLettersUp = (str) => {
 };
 
 allFirstLettersUp("lets check if this works?");
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+console.log("CHALLENGE 4:");
+
+//document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+
+document.querySelector("button").addEventListener("click", () => {
+  const userInput = document.querySelector("textarea").value;
+  const rows = userInput.split("\n");
+  //Now that we have an arr containing all cases spearte we can loop pver them to log to console. The logic for changing into cameCase will happen for every case as we loop
+
+  //for (const row of rows) {
+  //to get current index we must use entries of the arr. We distructure to getthat index
+  for (const [i, row] of rows.entries()) {
+    //Because there are different cases we make all lower case first and the trim to get rid of white spaces
+    //We also split at '_' to have to words whihch we will later join
+    //As we now have an array with two words we destructure that
+
+    const [first, second] = row.toLowerCase().trim().split("_");
+    const output = `${first[0].toUpperCase() + first.slice(1)}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+
+    //console.log(`${output.padEnd(20, " ")}👽`);
+    console.log(`${output.padEnd(20, " ")}${"👽".repeat(i + 1)}`);
+  }
+
+  //console.log(rows);
+});
